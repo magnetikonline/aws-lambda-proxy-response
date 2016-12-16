@@ -38,17 +38,17 @@ let assert = require('assert'),
 	let response = new AWSLambdaProxyResponse();
 
 	assert(
-		response.getResponse().statusCode == AWSLambdaProxyResponse.HTTP_STATUS.OK,
+		response.getPayload().statusCode == AWSLambdaProxyResponse.HTTP_STATUS.OK,
 		'New AWSLambdaProxyResponse() with no given HTTP status code should default to 200/OK'
 	);
 
 	assert(
-		Object.keys(response.getResponse().headers).length == 0,
+		Object.keys(response.getPayload().headers).length == 0,
 		'New AWSLambdaProxyResponse() should default to an empty HTTP header collection'
 	);
 
 	assert(
-		response.getResponse().body == '',
+		response.getPayload().body == '',
 		'New AWSLambdaProxyResponse() should default to an empty response body payload'
 	);
 
@@ -86,7 +86,7 @@ let assert = require('assert'),
 	response.setStatusCode(AWSLambdaProxyResponse.HTTP_STATUS.BAD_GATEWAY);
 
 	assert(
-		response.getResponse().statusCode == AWSLambdaProxyResponse.HTTP_STATUS.BAD_GATEWAY,
+		response.getPayload().statusCode == AWSLambdaProxyResponse.HTTP_STATUS.BAD_GATEWAY,
 		'Calling instance setStatusCode() method should update statusCode property to new HTTP status value'
 	);
 
@@ -103,7 +103,7 @@ let assert = require('assert'),
 	function testHeaderCollection(expected) {
 
 		assert.deepEqual(
-			response.getResponse().headers,
+			response.getPayload().headers,
 			expected,
 			'Expected header collection does not match actual'
 		);
@@ -161,7 +161,7 @@ let assert = require('assert'),
 	function testBody(expected) {
 
 		assert(
-			response.getResponse().body == expected,
+			response.getPayload().body == expected,
 			`Expected response body of [${expected}] not found`
 		);
 	}

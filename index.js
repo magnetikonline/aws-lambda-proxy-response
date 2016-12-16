@@ -76,7 +76,7 @@ class AWSLambdaProxyResponse {
 		return this;
 	}
 
-	getResponse() {
+	getPayload() {
 
 		return {
 			statusCode: this.statusCode,
@@ -92,6 +92,7 @@ AWSLambdaProxyResponse.HTTP_STATUS = {
 	MOVED: 301,
 	FOUND: 302,
 	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
 	FORBIDDEN: 403,
 	NOT_FOUND: 404,
 	SERVER_ERROR: 500,

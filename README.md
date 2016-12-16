@@ -17,7 +17,7 @@ The [response structure](http://docs.aws.amazon.com/apigateway/latest/developerg
 	- [AWSLambdaProxyResponse.setStatusCode(statusCode)](#awslambdaproxyresponsesetstatuscodestatuscode)
 	- [AWSLambdaProxyResponse.addHeader(name[,value])](#awslambdaproxyresponseaddheadernamevalue)
 	- [AWSLambdaProxyResponse.setBody(body)](#awslambdaproxyresponsesetbodybody)
-	- [AWSLambdaProxyResponse.getResponse()](#awslambdaproxyresponsegetresponse)
+	- [AWSLambdaProxyResponse.getPayload()](#awslambdaproxyresponsegetpayload)
 - [Constants](#constants)
 	- [AWSLambdaProxyResponse.HTTP_STATUS](#awslambdaproxyresponsehttp_status)
 - [Example usage](#example-usage)
@@ -72,7 +72,7 @@ myResponse.addHeader({
 - If `body` is not of type `string`, will be automatically serialized via `JSON.stringify()`.
 - Returns `AWSLambdaProxyResponse` instance.
 
-### AWSLambdaProxyResponse.getResponse()
+### AWSLambdaProxyResponse.getPayload()
 - Returns a valid Lambda proxy response structure object.
 
 ## Constants
@@ -90,6 +90,7 @@ console.dir(AWSLambdaProxyResponse.HTTP_STATUS);
 	MOVED: 301,
 	FOUND: 302,
 	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
 	FORBIDDEN: 403,
 	NOT_FOUND: 404,
 	SERVER_ERROR: 500,
@@ -113,10 +114,10 @@ exports.myHandler = function(event,context,callback) {
 	helloWorld.setBody('Hello world');
 
 	// return from Lambda
-	callback(null,helloWorld.getResponse());
+	callback(null,helloWorld.getPayload());
 
 	/*
-	console.dir(helloWorld.getResponse());
+	console.dir(helloWorld.getPayload());
 	{
 		statusCode: 200,
 		headers: {},
@@ -139,10 +140,10 @@ exports.myHandler = function(event,context,callback) {
 	overHere.addHeader('Location','https://my.new.domain.com/');
 
 	// return from Lambda
-	callback(null,overHere.getResponse());
+	callback(null,overHere.getPayload());
 
 	/*
-	console.dir(overHere.getResponse());
+	console.dir(overHere.getPayload());
 	{
 		statusCode: 301,
 		headers: { Location: 'https://my.new.domain.com/' },
