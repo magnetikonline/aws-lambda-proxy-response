@@ -44,8 +44,9 @@ class AWSLambdaProxyResponse {
 
 		if (value !== undefined) {
 			// adding a single header only
-			addHeaderCollection = {};
-			addHeaderCollection[name] = value;
+			addHeaderCollection = {
+				[name]: value
+			};
 		}
 
 		let headerKeyList = Object.keys(addHeaderCollection);
