@@ -25,8 +25,8 @@ class AWSLambdaProxyResponse {
 		let statusCollection = AWSLambdaProxyResponse.HTTP_STATUS,
 			isValid = Object.keys(statusCollection).some((statusName) => {
 
-			return (statusCollection[statusName] === statusCode);
-		});
+				return (statusCollection[statusName] === statusCode);
+			});
 
 		if (!isValid) {
 			throw new Error(`Invalid HTTP status code [${statusCode}] given`);
