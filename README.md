@@ -3,7 +3,8 @@ A Node.js module which generates response payloads for [API Gateway](https://aws
 
 [![NPM](https://nodei.co/npm/awslambdaproxyresponse.png?downloads=true)](https://nodei.co/npm/awslambdaproxyresponse/)
 
-The [response structure](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#api-gateway-simple-proxy-for-lambda-output-format) takes the following form:
+The [response structure](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format) takes the following form:
+
 ```js
 {
 	statusCode: httpStatusCode,
@@ -32,10 +33,11 @@ The [response structure](http://docs.aws.amazon.com/apigateway/latest/developerg
 - Constructor will throw an exception if given `statusCode` is not within this collection.
 
 Example:
-```js
-let AWSLambdaProxyResponse = require('awslambdaproxyresponse');
 
-let myResponse = new AWSLambdaProxyResponse(
+```js
+const AWSLambdaProxyResponse = require('awslambdaproxyresponse');
+
+const resp = new AWSLambdaProxyResponse(
 	AWSLambdaProxyResponse.HTTP_STATUS.FOUND
 );
 ```
@@ -53,15 +55,16 @@ let myResponse = new AWSLambdaProxyResponse(
 - Returns `AWSLambdaProxyResponse` instance.
 
 Example:
+
 ```js
-let AWSLambdaProxyResponse = require('awslambdaproxyresponse');
-let myResponse = new AWSLambdaProxyResponse();
+const AWSLambdaProxyResponse = require('awslambdaproxyresponse');
+const resp = new AWSLambdaProxyResponse();
 
 // lets add a single header
-myResponse.addHeader('Content-Type','text/html');
+resp.addHeader('Content-Type','text/html');
 
 // add several others
-myResponse.addHeader({
+resp.addHeader({
 	'x-custom-header': 'value',
 	'x-user-auth': 'Donald Duck'
 });
@@ -73,15 +76,15 @@ myResponse.addHeader({
 - Returns `AWSLambdaProxyResponse` instance.
 
 ### AWSLambdaProxyResponse.getPayload()
-- Returns a valid Lambda proxy response structure object.
+Returns a valid Lambda proxy response structure object.
 
 ## Constants
 
 ### AWSLambdaProxyResponse.HTTP_STATUS
-A collection of valid HTTP status codes for use with the `AWSLambdaProxyResponse()` constructor or `setStatusCode(statusCode)` method.
+A collection of valid HTTP status codes for use with the `AWSLambdaProxyResponse()` constructor or `setStatusCode(statusCode)` method:
 
 ```js
-let AWSLambdaProxyResponse = require('awslambdaproxyresponse');
+const AWSLambdaProxyResponse = require('awslambdaproxyresponse');
 console.dir(AWSLambdaProxyResponse.HTTP_STATUS);
 
 /*
@@ -104,20 +107,21 @@ console.dir(AWSLambdaProxyResponse.HTTP_STATUS);
 
 ## Example usage
 Within the context of a Lambda function:
-```js
-let AWSLambdaProxyResponse = require('awslambdaproxyresponse');
 
-exports.myHandler = function(event,context,callback) {
+```js
+const AWSLambdaProxyResponse = require('awslambdaproxyresponse');
+
+exports.myHandler = (event,context,callback) => {
 
 	// create our response
-	let helloWorld = new AWSLambdaProxyResponse();
-	helloWorld.setBody('Hello world');
+	const resp = new AWSLambdaProxyResponse();
+	resp.setBody('Hello world');
 
 	// return from Lambda
-	callback(null,helloWorld.getPayload());
+	callback(null,resp.getPayload());
 
 	/*
-	console.dir(helloWorld.getPayload());
+	console.dir(resp.getPayload());
 	{
 		statusCode: 200,
 		headers: {},
@@ -128,22 +132,23 @@ exports.myHandler = function(event,context,callback) {
 ```
 
 A Lambda response that results in a redirect:
-```js
-let AWSLambdaProxyResponse = require('awslambdaproxyresponse');
 
-exports.myHandler = function(event,context,callback) {
+```js
+const AWSLambdaProxyResponse = require('awslambdaproxyresponse');
+
+exports.myHandler = (event,context,callback) => {
 
 	// create our response
-	let overHere = new AWSLambdaProxyResponse();
+	const resp = new AWSLambdaProxyResponse();
 
-	overHere.setStatusCode(AWSLambdaProxyResponse.HTTP_STATUS.MOVED);
-	overHere.addHeader('Location','https://my.new.domain.com/');
+	resp.setStatusCode(AWSLambdaProxyResponse.HTTP_STATUS.MOVED);
+	resp.addHeader('Location','https://my.new.domain.com/');
 
 	// return from Lambda
-	callback(null,overHere.getPayload());
+	callback(null,resp.getPayload());
 
 	/*
-	console.dir(overHere.getPayload());
+	console.dir(resp.getPayload());
 	{
 		statusCode: 301,
 		headers: { Location: 'https://my.new.domain.com/' },
