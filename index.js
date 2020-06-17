@@ -1,12 +1,10 @@
 'use strict';
 
-let CONTENT_TYPE_REGEXP = /^[A-Za-z-]+$/;
+const CONTENT_TYPE_REGEXP = /^[A-Za-z-]+$/;
 
 
 class AWSLambdaProxyResponse {
-
 	constructor(statusCode) {
-
 		// default HTTP status to 200/OK if not given
 		this.setStatusCode(
 			(statusCode === undefined)
@@ -20,11 +18,9 @@ class AWSLambdaProxyResponse {
 	}
 
 	setStatusCode(statusCode) {
-
 		// is HTTP code valid?
-		let statusCollection = AWSLambdaProxyResponse.HTTP_STATUS,
+		const statusCollection = AWSLambdaProxyResponse.HTTP_STATUS,
 			isValid = Object.keys(statusCollection).some((statusName) => {
-
 				return (statusCollection[statusName] === statusCode);
 			});
 
@@ -38,7 +34,6 @@ class AWSLambdaProxyResponse {
 	}
 
 	addHeader(name,value) {
-
 		// assume name contains a header collection
 		let addHeaderCollection = name;
 
@@ -49,10 +44,9 @@ class AWSLambdaProxyResponse {
 			};
 		}
 
-		let headerKeyList = Object.keys(addHeaderCollection);
-
 		// validate all header names
-		for (let headerName of headerKeyList) {
+		const headerKeyList = Object.keys(addHeaderCollection);
+		for (const headerName of headerKeyList) {
 			if (!CONTENT_TYPE_REGEXP.test(headerName)) {
 				throw new Error(`Invalid HTTP header name of [${headerName}] given`);
 				break;
@@ -60,7 +54,7 @@ class AWSLambdaProxyResponse {
 		}
 
 		// with all header names validated, add into response
-		for (let headerName of headerKeyList) {
+		for (const headerName of headerKeyList) {
 			this.headerCollection[headerName] = addHeaderCollection[headerName].trim();
 		}
 
@@ -68,7 +62,6 @@ class AWSLambdaProxyResponse {
 	}
 
 	setBody(body) {
-
 		// if body isn't a string, we use JSON.stringify() to serialize
 		this.body = (typeof body == 'string')
 			? body
@@ -78,7 +71,6 @@ class AWSLambdaProxyResponse {
 	}
 
 	getPayload() {
-
 		return {
 			statusCode: this.statusCode,
 			headers: this.headerCollection,
