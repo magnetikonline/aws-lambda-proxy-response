@@ -1,5 +1,5 @@
 # AWS Lambda proxy response
-A Node.js module which generates response payloads for [API Gateway](https://aws.amazon.com/api-gateway/) fronted [Lambda](https://aws.amazon.com/lambda/) functions integrated via the [Lambda proxy](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#api-gateway-proxy-integration-types) method.
+A Node.js module which generates response payloads for [API Gateway](https://aws.amazon.com/api-gateway/) fronted [Lambda](https://aws.amazon.com/lambda/) functions integrated via the [Lambda proxy](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#lambda-proxy-integration-with-proxy-resource) method.
 
 [![NPM](https://nodei.co/npm/awslambdaproxyresponse.png?downloads=true)](https://nodei.co/npm/awslambdaproxyresponse/)
 
@@ -27,6 +27,7 @@ The [response structure](https://docs.aws.amazon.com/apigateway/latest/developer
 ## Methods
 
 ### AWSLambdaProxyResponse([statusCode])
+
 - Creates new `AWSLambdaProxyResponse` instance.
 - Optional `statusCode` sets the [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) for the response, otherwise defaults to `200 / OK`.
 - Collection of valid HTTP codes defined at [`AWSLambdaProxyResponse.HTTP_STATUS`](#awslambdaproxyresponsehttp_status).
@@ -43,11 +44,13 @@ const resp = new AWSLambdaProxyResponse(
 ```
 
 ### AWSLambdaProxyResponse.setStatusCode(statusCode)
+
 - Sets the HTTP `statusCode` for a response.
 - Throws an exception if given `statusCode` is not within the [`AWSLambdaProxyResponse.HTTP_STATUS`](#awslambdaproxyresponsehttp_status) collection.
 - Returns `AWSLambdaProxyResponse` instance.
 
 ### AWSLambdaProxyResponse.addHeader(name[,value])
+
 - Adds HTTP headers to the Lambda proxy response.
 - Single HTTP header can be added by providing a `name` / `value` pair.
 - Multiple headers can be added by providing an object collection as `name` only.
@@ -71,16 +74,19 @@ resp.addHeader({
 ```
 
 ### AWSLambdaProxyResponse.setBody(body)
+
 - Sets the response body payload.
 - If `body` is not of type `string`, will be automatically serialized via `JSON.stringify()`.
 - Returns `AWSLambdaProxyResponse` instance.
 
 ### AWSLambdaProxyResponse.getPayload()
+
 Returns a valid Lambda proxy response structure object.
 
 ## Constants
 
 ### AWSLambdaProxyResponse.HTTP_STATUS
+
 A collection of valid HTTP status codes for use with the `AWSLambdaProxyResponse()` constructor or `setStatusCode(statusCode)` method:
 
 ```js
@@ -106,6 +112,7 @@ console.dir(AWSLambdaProxyResponse.HTTP_STATUS);
 ```
 
 ## Example usage
+
 Within the context of a Lambda function:
 
 ```js
@@ -159,5 +166,7 @@ exports.myHandler = (event,context,callback) => {
 ```
 
 ## Reference
-- http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
-- http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#api-gateway-simple-proxy-for-lambda-output-format
+
+- https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html
+- https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#lambda-proxy-integration-with-proxy-resource
+- https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format
