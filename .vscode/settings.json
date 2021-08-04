@@ -4,9 +4,9 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 	"javascript.format.semicolons": "insert",
 	"[javascript]": {
-		"editor.formatOnSave": true
+		"editor.formatOnSave": true,
 	},
 	"[json]": {
-		"editor.formatOnSave": true
-	}
+		"editor.formatOnSave": true,
+	},
 }
