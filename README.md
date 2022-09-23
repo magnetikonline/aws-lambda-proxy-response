@@ -52,7 +52,7 @@ const resp = new AWSLambdaProxyResponse(
 ### `AWSLambdaProxyResponse.setStatusCode(statusCode)`
 
 - Sets the HTTP `statusCode` for a response.
-- Throws an exception if given `statusCode` is not within the [`AWSLambdaProxyResponse.HTTP_STATUS`](#awslambdaproxyresponsehttp_status) collection.
+- Throws exception if `statusCode` not within [`AWSLambdaProxyResponse.HTTP_STATUS`](#awslambdaproxyresponsehttp_status) collection.
 - Returns `AWSLambdaProxyResponse` instance.
 
 ### `AWSLambdaProxyResponse.addHeader(name[,value])`
@@ -60,7 +60,7 @@ const resp = new AWSLambdaProxyResponse(
 - Adds HTTP headers to the Lambda proxy response.
 - Single HTTP header can be added by providing a `name` / `value` pair.
 - Multiple headers can be added by providing an object collection as `name` only.
-- Throws an exception if header names don't match the regular expression pattern `/^[A-Za-z-]+$/`.
+- Throws exception if header name(s) do not match regular expression `/^[A-Za-z-]+$/`.
 - Returns `AWSLambdaProxyResponse` instance.
 
 Example:
