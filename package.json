@@ -7,11 +7,11 @@
 		"aws",
 		"lambda"
 	],
-	"author": "Peter Mescalchin (http://magnetikonline.com)",
 	"license": "MIT",
+	"author": "Peter Mescalchin (http://magnetikonline.com)",
 	"main": "index.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/magnetikonline/aws-lambda-proxy-response.git"
+		"url": "git+https://github.com/magnetikonline/aws-lambda-proxy-response.git"
 	}
 }
