@@ -15,5 +15,10 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/magnetikonline/aws-lambda-proxy-response.git"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.4.1",
+		"globals": "^17.6.0"
 	}
 }
